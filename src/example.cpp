@@ -8,44 +8,29 @@ using namespace oxygine;
 //It is important on mobile devices with limited memory and you would load/unload them
 Resources gameResources;
 
+class MainActor;
+
+typedef oxygine::intrusive_ptr<MainActor> spMainActor;
+typedef oxygine::intrusive_ptr<Draggable> spDraggable;
 
 class MainActor: public Actor
 {
 public:
-    spSprite    _button;
-    bool _moving;
-    Vector2 _clickPosition;
+    Draggable _draggable;
 
-    MainActor() : _moving{false}, _clickPosition(0, 0)
+    MainActor()
     {
         spSprite button = new Sprite();
         button->setResAnim(gameResources.getResAnim("button"));
-        button->setPosition(Vector2(0,0));
-
-        button->addEventListener(TouchEvent::TOUCH_DOWN, [this](Event * e) {
-            TouchEvent* foo = (TouchEvent*) e;
-            this->_moving = true;
-            this->_clickPosition = foo->position;
-        });
-        button->addEventListener(TouchEvent::TOUCH_UP, [this](Event * e) {
-            this->_moving = false;
-        });
-        button->addEventListener(TouchEvent::MOVE, [this](Event * e) {
-            TouchEvent* foo = (TouchEvent*) e;
-            if (!this->_moving) {
-                return;
-            }
-
-            Vector2 newPosition = this->_button->getPosition() + (foo->position - this->_clickPosition);
-            this->_button->setPosition(newPosition);
-        });
-
-        //attach button as child to current actor
+        Vector2 pos = getStage()->getSize() / 2 - button->getSize() / 2;
+        button->setPosition(pos);
         addChild(button);
-        _button = button;
+    }
+
+    void foo() {
+        this->_draggable.init(this);
     }
 };
-typedef oxygine::intrusive_ptr<MainActor> spMainActor;
 
 void example_preinit() {}
 
@@ -55,6 +40,7 @@ void example_init()
 
     spMainActor actor = new MainActor;
     getStage()->addChild(actor);
+    actor->foo();
 }
 
 void example_update()
