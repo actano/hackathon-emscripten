@@ -46,7 +46,7 @@ set(OXYGINE_CORE_LIBS ${CORE_LIBS})
 set(LIBPNG ${libprefix}png)
 
 add_executable(HelloWorld ./src/example.cpp ./src/main.cpp  ./src/example.h)
-target_link_libraries(HelloWorld ${OXYGINE_CORE_LIBS} /Users/oesse/liboxygine-framework.a)
+target_link_libraries(HelloWorld ${OXYGINE_CORE_LIBS} ${CMAKE_CURRENT_SOURCE_DIR}/liboxygine-framework.a)
 
 SET(CMAKE_EXECUTABLE_SUFFIX ".html")	
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s NO_EXIT_RUNTIME=1 -s WARN_ON_UNDEFINED_SYMBOLS=1 --memory-init-file 0 -s TOTAL_MEMORY=50331648")
