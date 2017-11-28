@@ -14,17 +14,14 @@ class MainActor: public Actor
 public:
     spSprite    _button;
     bool _moving;
-    Vector2 _position, _clickPosition;
+    Vector2 _clickPosition;
 
-    MainActor() : _moving{false}, _position(0, 0), _clickPosition(0, 0)
+    MainActor() : _moving{false}, _clickPosition(0, 0)
     {
         spSprite button = new Sprite();
         button->setResAnim(gameResources.getResAnim("button"));
-        button->setPosition(this->_position);
+        button->setPosition(Vector2(0,0));
 
-        button->addEventListener(TouchEvent::CLICK, [this](Event * e) {
-            this->buttonClicked(e);
-        });
         button->addEventListener(TouchEvent::TOUCH_DOWN, [this](Event * e) {
             TouchEvent* foo = (TouchEvent*) e;
             this->_moving = true;
@@ -39,18 +36,13 @@ public:
                 return;
             }
 
-            this->_position += (foo->position - this->_clickPosition);
-            this->_button->setPosition(this->_position);
+            Vector2 newPosition = this->_button->getPosition() + (foo->position - this->_clickPosition);
+            this->_button->setPosition(newPosition);
         });
 
         //attach button as child to current actor
         addChild(button);
         _button = button;
-    }
-
-    void buttonClicked(Event* event)
-    {
-        std::cout<<"clicked"<<std::endl;
     }
 };
 typedef oxygine::intrusive_ptr<MainActor> spMainActor;
