@@ -65,7 +65,6 @@ void run()
     example_init();
 }
 
-
 extern "C"
 {
     void one(void* param) { mainloop(); }
