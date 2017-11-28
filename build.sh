@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o pipefail
-export EMSCRIPTEN=${HOME}/projects/emscripten/emsdk-portable/emscripten/1.37.22
-OXYGINE=${HOME}/projects/oxygine/oxygine-framework
+# export EMSCRIPTEN=${HOME}/projects/emscripten/emsdk-portable/emscripten/1.37.22
+# export OXYGINE=${HOME}/projects/oxygine/oxygine-framework
 
 mkdir -p build
 cd build

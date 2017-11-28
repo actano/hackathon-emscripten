@@ -1,15 +1,14 @@
 cmake_minimum_required (VERSION 2.6)
 project (HelloWorld)
 
-set(OXYGINE_ROOT /Users/oesse/projects/oxygine/oxygine-framework/oxygine)
+
+set(OXYGINE_ROOT $ENV{OXYGINE}/oxygine)
 set(OXYGINE_SRC ${OXYGINE_ROOT}/src)
-set(THIRD_PARTY ${OXYGINE_ROOT}/third_party/${PLATFORM})
 set(OXYGINE_INCLUDE_DIRS ${OXYGINE_SRC})
 
 set(OXYGINE_LIBRARY_DIRS
 	${OXYGINE_LIBRARY_DIRS}
-	${OXYGINE_SOURCE_DIR}/libs
-	${THIRD_PARTY}/libraries)
+	${OXYGINE_SOURCE_DIR}/libs)
 
 set(OXYGINE_DEFINITIONS
 	${OX_DEFINITIONS})
